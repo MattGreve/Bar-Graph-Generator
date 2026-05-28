@@ -145,6 +145,8 @@ def _on_build(*_):
             cmds.select(clear=True)
             print(f"[Bar Graph] Successfully generated: {grp_nm}")
 
+# Automatically calculates and inserts a mean/average data row from all entered values.
+
 def _add_row(label="", value="", row_layout=None):
 
      if len(_row_fields) >= MAX_ROWS:
@@ -235,7 +237,6 @@ def _on_clear_all(*_):
             cmds.deleteUI(parent)
 
     _row_fields.clear()
-
 
 
 # ─────────────────────────────────────────────
