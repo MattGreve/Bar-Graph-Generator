@@ -145,6 +145,98 @@ def _on_build(*_):
             cmds.select(clear=True)
             print(f"[Bar Graph] Successfully generated: {grp_nm}")
 
+def _add_row(label="", value="", row_layout=None):
+
+     if len(_row_fields) >= MAX_ROWS:
+        cmds.warning(f"Maximum {MAX_ROWS} rows reached.")
+        return
+
+     if row_layout is None:
+        row_layout = "bgRowsLayout"
+
+    cmds.setParent(row_layout)
+
+        row = cmds.rowLayout(numberOfColumns=3, columnWidth3=(220, 120, 30), adjustableColumn=1)
+
+        If = cmds.textField(text=label, placeholderText="Label", width=210)
+
+        vf = cmds.textField(text=value, placeholderText="Value", width=110)
+
+def _remove(*_):
+       
+       _row_fields[:] = [
+            (l, v)
+            for l, v in _row_fields
+            if l != lf
+        ]
+
+         if cmds.rowLayout(row, exists=True):
+
+cmds.deleteUI(row)
+
+    cmds.button(
+        label="✕",
+        width=24,
+        command=_remove,
+        annotation="Remove row")
+
+    cmds.setParent("..")
+
+    _row_fields.append((lf, vf))
+
+def _add_calculated_average(*_):
+   
+    """Calculates the average of all valid entered values
+    and adds it as a new graph row."""
+
+    values = []
+
+    # Collect valid numeric values
+    for lf, vf in _row_fields:
+
+        if not cmds.textField(vf, exists=True):
+            continue
+
+        val_s = cmds.textField(vf, q=True, text=True).strip()
+
+        try:
+            values.append(float(val_s))
+
+        except ValueError:
+            continue
+
+    # Prevent divide-by-zero
+    if not values:
+        cmds.warning("[Bar Graph] No valid numeric values found.")
+        return
+
+    avg = sum(values) / len(values)
+
+    # Add a new row
+    _add_row(
+        label="Calculated Avg",
+        value=f"{avg:.3f}"
+    )
+
+    print(f"[Bar Graph] Added calculated average row: {avg:.3f}")
+
+
+def _on_clear_all(*_):
+
+    for lf, vf in list(_row_fields):
+
+        parent = cmds.textField(
+            lf,
+            q=True,
+            parent=True
+        )
+
+        if cmds.rowLayout(parent, exists=True):
+            cmds.deleteUI(parent)
+
+    _row_fields.clear()
+
+
 
 # ─────────────────────────────────────────────
 #  UI LAYOUT
