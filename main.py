@@ -10,7 +10,7 @@ import os
 import maya.cmds as cmds
 
 # Ensure Maya can find our custom modules
-current_dir = os.path.dirname(__file__) if "__file__" in locals() else cmds.internalVar(userScriptDir=True)
+current_dir = r"/Users/mattmac/Documents/maya/projects/default/scripts"  # or wherever main.py and Geometry_utils.py are
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
@@ -110,6 +110,8 @@ def _on_build(*_):
         "total_width": total_width - bar_sp
     }
 
+    Geometry_utils._print_debug(f"Context calculated: Min={safe_min}, Max={safe_max}, Target Avg={target_avg}")
+    
     # Inject static elements into the configuration list
     if add_ground:
         config.insert(0, {"type": "ground"})
