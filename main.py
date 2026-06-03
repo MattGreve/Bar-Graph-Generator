@@ -110,8 +110,6 @@ def _on_build(*_):
         "total_width": total_width - bar_sp
     }
 
-    Geometry_utils._print_debug(f"Context calculated: Min={safe_min}, Max={safe_max}, Target Avg={target_avg}")
-
     # Inject static elements into the configuration list
     if add_ground:
         config.insert(0, {"type": "ground"})
