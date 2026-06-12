@@ -190,7 +190,7 @@ def open_ui():
     if cmds.window(WIN_ID, exists=True):
         cmds.deleteUI(WIN_ID)
 
-    win = cmds.window(WIN_ID, title="Graph Generator", widthHeight=(440, 580), sizeable=True)
+    win = cmds.window(WIN_ID, title="Graph Generator", widthHeight=(440, 580), sizeable=False)
     cmds.columnLayout(adjustableColumn=True, rowSpacing=6, columnOffset=("both", 10))
 
     cmds.separator(height=8, style="none")
@@ -205,7 +205,7 @@ def open_ui():
     cmds.text(label="  Value", font="smallBoldLabelFont", width=120)
     cmds.setParent("..")
 
-    scroll = cmds.scrollLayout("bgScrollArea", height=200, childResizable=True)
+    scroll = cmds.scrollLayout("bgScrollArea", height=450, childResizable=True)
     rows_col = cmds.columnLayout("bgRowsLayout", adjustableColumn=True, rowSpacing=3, parent=scroll)
 
     for lbl, val in DEFAULT_ROWS:
