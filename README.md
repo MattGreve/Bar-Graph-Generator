@@ -5,6 +5,13 @@ Takes user input data and turns it into a bar graph with an optional average lin
 
 Sorts user input data and turns it into a 3D bar graph.
 
+## How to use
+
+Place all three files in a common folder.
+Replace the file path on line 13 in main.py with your file path.
+Run in maya script editor tab.
+Replace values and move sliders to match the result you want.
+
 ## Project Structure
 
 Bar_Graph_Generator
